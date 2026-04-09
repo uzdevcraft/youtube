@@ -1,0 +1,129 @@
+// ─── Breakpoints ──────────────────────────────────────────────────────────────
+$bp-xs: 480px;
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+@mixin xs {
+  @media (max-width: #{$bp-xs}) { @content; }
+}
+@mixin sm {
+  @media (max-width: #{$bp-sm}) { @content; }
+}
+@mixin md {
+  @media (max-width: #{$bp-md}) { @content; }
+}
+@mixin lg {
+  @media (max-width: #{$bp-lg}) { @content; }
+}
+@mixin xl {
+  @media (max-width: #{$bp-xl}) { @content; }
+}
+
+@mixin min-sm {
+  @media (min-width: #{$bp-sm}) { @content; }
+}
+@mixin min-md {
+  @media (min-width: #{$bp-md}) { @content; }
+}
+@mixin min-lg {
+  @media (min-width: #{$bp-lg}) { @content; }
+}
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+@mixin text-overflow-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// ─── Interactions ─────────────────────────────────────────────────────────────
+@mixin hover-bg($color: var(--bg-hover)) {
+  transition: background-color var(--transition-fast);
+  border-radius: 6px;
+
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color var(--transition-fast);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bg-hover);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+  }
+}
+
+// ─── Skeleton shimmer ─────────────────────────────────────────────────────────
+@mixin skeleton {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    left: 100%;
+  }
+}

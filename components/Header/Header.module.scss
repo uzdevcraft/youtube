@@ -1,0 +1,112 @@
+@use "@/styles/mixins" as *;
+
+.header_content {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  padding-left: 0 0 24px;
+}
+
+.menuBtn {
+  margin-right: 12px;
+  @include icon-button;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.logo {
+  width: 95px;
+  height: 20px;
+  display: block;
+  fill: currentcolor;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.logoIcon {
+  width: 90px;
+  height: 20px;
+}
+
+.bottomBar {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 20px 0 0 250px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.bottomBar--collapsed {
+  padding-left: 72px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 35%;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.inputRoot {
+  flex: 1;
+}
+
+.input {
+  border-radius: 999px !important;
+  height: 40px !important;
+  padding-left: 16px !important;
+  padding-right: 45px !important;
+  border: 1px solid #303030 !important;
+  background-color: #121212 !important;
+  color: white !important;
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  &:focus {
+    border-color: #3ea6ff;
+  }
+}
+
+.iconBtn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  background-color: #222;
+  color: #fff;
+
+  &:hover {
+    background-color: #333;
+  }
+}
+
+.searchBtn {
+  border-left: 1px solid #303030;
+  border-radius: 0 999px 999px 0;
+  width: 50px;
+  margin-right: 20px;
+}
+
+.searchIcon {
+  color: #fafafa;
+}
+
+.micBtn {
+  flex-shrink: 0;
+}

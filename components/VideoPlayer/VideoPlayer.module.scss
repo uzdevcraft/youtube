@@ -1,0 +1,23 @@
+@use "@/styles/mixins" as *;
+
+.playerWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.iframe {
+  @include absolute-fill;
+  border: none;
+}
+
+.skeleton {
+  @include skeleton;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: 0;
+}
