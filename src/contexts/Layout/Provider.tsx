@@ -7,7 +7,7 @@ import * as Types from './types';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [desktopOpen, setDesktopOpen] = useState<boolean | null>(null);
+  const [desktopOpen, setDesktopOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('sidebar');

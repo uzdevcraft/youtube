@@ -20,7 +20,7 @@ export const sidebarData: SidebarItem[] = [
     id: 'shorts',
     label: 'Shorts',
     icon: IconPlayerPlay,
-    href: '/settings'
+    href: '/shorts'
   },
   {
     id: 'subscriptions',
@@ -29,21 +29,9 @@ export const sidebarData: SidebarItem[] = [
     href: '/subscriptions'
   },
   {
-    id: 'library',
-    label: 'Library',
-    icon: IconVideo,
-    href: '/library'
-  },
-  {
     id: 'history',
     label: 'History',
     icon: IconHistory,
     href: '/history'
-  },
-  {
-    id: 'watchlater',
-    label: 'Watch Later',
-    icon: IconClock,
-    href: '/watchlater'
   }
 ];

@@ -10,9 +10,9 @@ import { useContext } from '@/contexts/Layout';
 import classes from './Layout.module.scss';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { desktopOpen, mobileOpen } = useContext();
+  const { desktopOpen, mobileOpen, toggleDesktop } = useContext();
 
-  if (desktopOpen === null) return null;
+  if (desktopOpen === null) toggleDesktop();
 
   return (
     <AppShell
