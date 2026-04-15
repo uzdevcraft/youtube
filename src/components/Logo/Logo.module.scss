@@ -1,0 +1,15 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95px;
+  fill: var(--mantine-color-white);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: #ffffff;
+  }
+}

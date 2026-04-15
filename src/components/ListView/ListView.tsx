@@ -1,11 +1,14 @@
-import React from 'react';
+'use client';
+
+import { useMemo, useState } from 'react';
+import { VideoCard } from '@/components/VideoCard';
+import { Badge, Button, Group, SimpleGrid, Stack, Text, Title, useMantineTheme } from '@mantine/core';
+
+import cx from 'clsx';
+import classes from './ListView.module.scss';
 
 const ListView = () => {
-  return (
-    <div>
-      <h1>ListView</h1>
-    </div>
-  );
+  return <section className={classes.listView}></section>;
 };
 
 export default ListView;

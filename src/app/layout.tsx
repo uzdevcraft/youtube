@@ -3,9 +3,10 @@ import '@/styles/globals.scss';
 
 import { type Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-
-import Providers from '@/containers/Providers';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+
+import { Layout } from '@/components/Layout';
+import Providers from '@/containers/Providers';
 
 export const metadata: Metadata = {
   title: 'YouTube',
@@ -49,7 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ColorSchemeScript />
       </head>
       <body className={roboto.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );

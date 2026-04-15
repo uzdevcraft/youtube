@@ -1,7 +1,7 @@
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 500;
+  // position: sticky;
+  // top: 0;
+  // z-index: 500;
   padding: 0 16px;
   color: var(--mantine-color-white);
   border-bottom: 1px solid #272727;
@@ -17,26 +17,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 95px;
-  fill: var(--mantine-color-white);
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: #ffffff;
-  }
-}
-
-.youtubeText {
-  letter-spacing: -0.5px;
 }
 
 // Center Section: Search
@@ -62,8 +42,7 @@
   input {
     height: 40px;
     padding: 0 16px;
-    border: 1px solid var(--border-color, #ccc);
-    // border-right: none;
+    border: 1.5px solid var(--border-color, #ccc);
     border-radius: 20px 0 0 20px;
     font-size: 14px;
     background-color: var(--background-secondary, #f9f9f9);
@@ -76,7 +55,6 @@
     &:focus {
       outline: none;
       border-color: #1976d2;
-      box-shadow: inset 0 0 0 1px #1976d2;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -94,8 +72,8 @@
 .searchBtn {
   height: 42px;
   width: 60px;
-  border-left: none;
   border: 1px solid #555;
+  border-left: none;
   border-radius: 0 20px 20px 0;
   background-color: #222222;
   color: var(--text-primary, #606060);

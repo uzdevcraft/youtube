@@ -1,10 +1,12 @@
 'use client';
 
 import { Toaster } from 'sonner';
-import { FC, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { MantineProvider } from '@mantine/core';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { Layout } from '@/contexts';
 
 import { theme } from '../../theme';
 
@@ -37,34 +39,30 @@ const queryClient = new QueryClient({
   })
 });
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Providers: FC<LayoutProps> = ({ children }) => {
+export default function Providers({ children }: { children: ReactNode }) {
   const [client] = useState(queryClient);
 
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark" forceColorScheme="dark">
       <QueryClientProvider client={client}>
-        {children}
-        <Toaster
-          position="top-center"
-          theme="dark"
-          richColors
-          closeButton
-          // toastOptions={{
-          //   style: {
-          //     background: "var(--bg-tertiary)",
-          //     border: "1px solid var(--border-color)",
-          //     color: "var(--text-primary)",
-          //   },
-          // }}
-        />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <Layout.Provider>
+          {children}
+          <Toaster
+            position="top-center"
+            theme="dark"
+            richColors
+            closeButton
+            // toastOptions={{
+            //   style: {
+            //     background: "var(--bg-tertiary)",
+            //     border: "1px solid var(--border-color)",
+            //     color: "var(--text-primary)",
+            //   },
+            // }}
+          />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Layout.Provider>
       </QueryClientProvider>
     </MantineProvider>
   );
-};
-
-export default Providers;
+}
