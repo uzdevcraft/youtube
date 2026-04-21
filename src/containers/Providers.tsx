@@ -47,19 +47,7 @@ export default function Providers({ children }: { children: ReactNode }) {
       <QueryClientProvider client={client}>
         <Layout.Provider>
           {children}
-          <Toaster
-            position="top-center"
-            theme="dark"
-            richColors
-            closeButton
-            // toastOptions={{
-            //   style: {
-            //     background: "var(--bg-tertiary)",
-            //     border: "1px solid var(--border-color)",
-            //     color: "var(--text-primary)",
-            //   },
-            // }}
-          />
+          <Toaster position="top-center" theme="dark" richColors closeButton />
           <ReactQueryDevtools initialIsOpen={false} />
         </Layout.Provider>
       </QueryClientProvider>

@@ -47,26 +47,29 @@
   }
 }
 
+.clearButton {
+  color: #fff;
+  border-radius: 50%;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #7b7b7b65 !important;
+  }
+}
+
 .searchBtn {
   width: 60px;
   height: 42px;
   color: #fff;
   border-radius: 0 20px 20px 0;
   background-color: #212121 !important;
-  border: 1px solid rgb(198, 198, 198);
+  border: 1px solid rgb(85, 85, 85);
   border-left: none;
 
   &:hover {
     background-color: #e0e0e0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: #fff;
-    border-color: #555;
-    background-color: #313131;
-
-    &:hover {
-      background-color: #414141;
-    }
   }
 }

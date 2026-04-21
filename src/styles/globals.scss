@@ -12,15 +12,49 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-// html[data-mantine-color-scheme='dark'] {
-//   --mantine-color-text: #000 !important;
-//   --mantine-color-body: #fff !important;
-// }
+:root {
+  // Primary background color
+  --bg-primary: #0f0f0f;
 
-// html[data-mantine-color-scheme='light'] {
-//   --mantine-color-text: #fff !important;
-//   --mantine-color-body: #0f0f0f !important;
-// }
+  // Secondary background color used for light areas of the page
+  --bg-secondary: #1a1a1a;
+
+  // Tertiary background color used for areas like input fields
+  --bg-tertiary: #2a2a2a;
+
+  // Hover background color used for visual feedback on hover
+  --bg-hover: #3a3a3a;
+
+  // Secondary text color used for small text
+  --text-secondary: #cccccc;
+
+  // Tertiary text color used for disabled text, labels and placeholders
+  --text-tertiary: #757575;
+
+  // Border color
+  --border-color: #333333;
+
+  // Blue accent color used for buttons, links etc.
+  --accent-blue: #1976d2;
+
+  // Green accent color used for success messages
+  --accent-green: #43a047;
+
+  // Red accent color used for error messages
+  --accent-red: #d32f2f;
+
+  // Purple accent color used for special elements
+  --accent-purple: #5c2d91;
+
+  // Yellow accent color used for warnings
+  --accent-yellow: #c2b600;
+
+  // Text color for white backgrounds
+  --text-dark: #0f0f0f;
+
+  // Text color for dark backgrounds
+  --text-white: #ffffff;
+}
 
 body {
   color: #fff;

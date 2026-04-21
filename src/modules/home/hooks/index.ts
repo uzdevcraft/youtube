@@ -1,0 +1,1 @@
+export { useTrendingVideos } from './useVideos';

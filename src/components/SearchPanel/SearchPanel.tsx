@@ -12,13 +12,16 @@ const SearchPanel = () => {
   const handleSearch = () => {
     if (value.trim()) console.log('Search for:', value);
   };
+
   return (
     <Group gap={0} className={classes.centerSection}>
       <Input
         placeholder="Search"
         value={value}
         onChange={event => setValue(event.currentTarget.value)}
-        rightSection={value !== '' ? <Input.ClearButton onClick={() => setValue('')} /> : undefined}
+        rightSection={
+          value !== '' ? <Input.ClearButton className={classes.clearButton} onClick={() => setValue('')} /> : undefined
+        }
         onKeyDown={e => e.key === 'Enter' && handleSearch()}
         rightSectionPointerEvents="auto"
         radius={40}

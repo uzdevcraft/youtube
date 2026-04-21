@@ -1,34 +1,51 @@
 import axios from 'axios';
-import storage from '@/services/storage';
+import type { AxiosError, AxiosInstance } from 'axios';
 
-export const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    Accept: 'application/json',
-    'Accept-Language': 'ru',
-    Currency: 'uzs',
-    'Content-Type': 'application/json'
-  }
-});
+const YOUTUBE_BASE_URL = process.env.NEXT_PUBLIC_YOUTUBE_DATA_BASE_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY ?? '';
 
-console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
-http.interceptors.request.use(axiosConfig => {
-  const accessToken = storage.local.get('accessToken') || '';
+function createYouTubeClient(): AxiosInstance {
+  const http = axios.create({
+    baseURL: YOUTUBE_BASE_URL,
+    timeout: 15_000,
+    params: {
+      key: API_KEY
+    }
+  });
 
-  if (accessToken) {
-    axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
-  }
+  // Check if key is present in params
+  http.interceptors.request.use(
+    config => {
+      if (!config.params?.key) {
+        config.params = { ...config.params, key: API_KEY };
+      }
+      return config;
+    },
+    (error: AxiosError) => Promise.reject(error)
+  );
 
-  return axiosConfig;
-});
+  // Handle errors
+  http.interceptors.response.use(
+    response => response,
+    (error: AxiosError) => {
+      const status = error.response?.status;
 
-const pureHttp = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    Accept: 'application/json',
-    'Accept-Language': 'ru',
-    'Content-Type': 'application/json'
-  }
-});
+      if (status === 403) {
+        console.error('[YouTube API] 403 Forbidden – check API key / quota');
+      } else if (status === 429) {
+        console.error('[YouTube API] 429 Rate limited – quota exceeded');
+      } else if (status === 400) {
+        console.error('[YouTube API] 400 Bad Request – invalid params');
+        console.error('Response data:', error.response?.data);
+      }
 
-export default { pureRequest: pureHttp, request: http } as const;
+      return Promise.reject(error);
+    }
+  );
+
+  return http;
+}
+
+const httpYoutube = createYouTubeClient();
+
+export default httpYoutube;
