@@ -1,112 +1,266 @@
 .card {
-  background: var(--white);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  font-family: 'Roboto', 'YouTube Sans', Arial, sans-serif;
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-color-blue-5);
+    outline-offset: 2px;
+    border-radius: 12px;
+  }
 }
 
-.hovered {
-  transform: translateY(-5px);
-  border-color: rgba(79, 70, 229, 0.18);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-}
-
-.thumbnailSection {
+/* ─── Thumbnail wrapper ──────────────────────────────────────────────────────── */
+.thumbnailWrapper {
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 16px;
+  background: var(--mantine-color-dark-5, #272727);
+  flex-shrink: 0;
+
+  .card:hover & {
+    opacity: 1;
+  }
 }
 
 .thumbnail {
   width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover !important;
+  transition: transform 0.2s ease;
+
+  .card:hover & {
+    transform: scale(1.02);
+  }
 }
 
-.durationBadge {
+/* ─── Duration badge ─────────────────────────────────────────────────────────── */
+.duration {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.8);
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
+  padding: 3px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
 }
 
-.headerGroup {
-  margin-top: 16px;
-  gap: 8px;
+/* ─── Meta row (avatar + text) ───────────────────────────────────────────────── */
+.meta {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0 0;
+  align-items: flex-start;
+}
+
+/* ─── Channel avatar ─────────────────────────────────────────────────────────── */
+.avatarWrapper {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--mantine-color-dark-4, #3f3f3f);
+  position: relative;
+}
+
+/* ─── Text content ───────────────────────────────────────────────────────────── */
+.textContent {
+  flex: 1;
+  min-width: 0; // allow ellipsis to work in children
 }
 
 .title {
-  flex: 1;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1.4;
+  color: var(--mantine-color-text, #0f0f0f);
+  margin: 0 0 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+
+  // Dark mode via Mantine's color scheme
+  [data-mantine-color-scheme='dark'] & {
+    color: var(--mantine-color-white, #fff);
+  }
+
+  .card:hover & {
+    // text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  &:active {
+    cursor: text;
+  }
 }
 
-.menuButton {
-  color: var(--text-secondary, #71717a);
-  border-radius: 12px;
-}
-
-.channelGroup {
-  margin-top: 16px;
-}
-
-.channelInfo {
-  min-width: 0;
+.channelRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
 }
 
 .channelName {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--mantine-color-dimmed, #606060);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &:hover {
+    color: var(--mantine-color-text, #0f0f0f);
+
+    [data-mantine-color-scheme='dark'] & {
+      color: var(--mantine-color-white, #fff);
+    }
+  }
+
+  &:active {
+    cursor: text;
+  }
 }
 
-.metaRow {
-  flex-wrap: wrap;
+.verifiedIcon {
+  flex-shrink: 0;
+  color: var(--mantine-color-dimmed, #606060);
+  display: flex;
+  align-items: center;
 }
 
-.description {
-  margin-top: 14px;
+.statsRow {
+  font-size: 13px;
+  color: var(--mantine-color-dimmed, #606060);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &::before {
+    content: '';
+  }
 }
 
-.footerGroup {
-  margin-top: 18px;
+.dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background: var(--mantine-color-dimmed, #909090);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Skeleton loader ────────────────────────────────────────────────────────── */
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   width: 100%;
 }
 
-.badge {
-  background-color: #ede9fe;
-  color: #44337a;
-  padding: 0 10px;
+.skeletonThumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: var(--mantine-color-dark-5, #e5e5e5);
+  animation: shimmer 1.6s infinite linear;
+  background-size: 200% 100%;
 }
 
-.watchButton {
-  min-width: 120px;
+.skeletonMeta {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0 0;
+  align-items: flex-start;
 }
 
-@media (max-width: 768px) {
-  .card {
-    border-radius: 18px;
+.skeletonAvatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--mantine-color-dark-5, #e5e5e5);
+  animation: shimmer 1.6s infinite linear;
+  background-size: 200% 100%;
+}
+
+.skeletonLines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonLine {
+  height: 14px;
+  border-radius: 4px;
+  background: var(--mantine-color-dark-5, #e5e5e5);
+  animation: shimmer 1.6s infinite linear;
+  background-size: 200% 100%;
+
+  &:nth-child(1) {
+    width: 95%;
   }
+  &:nth-child(2) {
+    width: 75%;
+  }
+  &:nth-child(3) {
+    width: 55%;
+    height: 12px;
+  }
+}
 
+/* ─── Shimmer keyframe ───────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-image: linear-gradient(
+      90deg,
+      var(--mantine-color-dark-5, #e0e0e0) 25%,
+      var(--mantine-color-dark-4, #ebebeb) 50%,
+      var(--mantine-color-dark-5, #e0e0e0) 75%
+    );
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
   .title {
-    font-size: 0.95rem;
+    font-size: 14px;
   }
 
-  .footerGroup {
-    flex-direction: column;
-    align-items: stretch;
+  .channelName,
+  .statsRow {
+    font-size: 12px;
   }
 
-  .watchButton {
-    width: 100%;
+  .avatarWrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .meta {
+    gap: 10px;
   }
 }

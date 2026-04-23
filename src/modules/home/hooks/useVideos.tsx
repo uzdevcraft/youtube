@@ -7,20 +7,33 @@ import * as Types from '../types';
 import * as Mappers from '../mappers';
 
 export function useTrendingVideos(regionCode = 'US') {
-  return useInfiniteQuery<Types.IQuery.List, string>({
+  return useInfiniteQuery({
     queryKey: ['videos', 'trending', regionCode],
 
+    initialPageParam: '',
+
     queryFn: async ({ pageParam }) => {
-      const { data } = await Api.Videos(pageParam as string | undefined, regionCode);
+      const { data } = await Api.Videos({
+        pageToken: pageParam || undefined,
+        regionCode
+      });
+
       return Mappers.List(data);
     },
 
-    initialPageParam: undefined,
+    getNextPageParam: (lastPage, pages) => {
+      const next = lastPage.nextPageToken;
+      if (!next) return undefined;
 
-    getNextPageParam: lastPage => lastPage.nextPageToken,
+      const used = pages.map(p => p.nextPageToken);
+      if (used.includes(next)) return undefined;
+
+      return next;
+    },
 
     staleTime: STALE_TIME.MEDIUM,
     gcTime: STALE_TIME.LONG,
-    retry: 2
+    retry: 2,
+    enabled: !!regionCode
   });
 }
