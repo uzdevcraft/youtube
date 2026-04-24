@@ -1,4 +1,12 @@
+.root {
+  height: 100vh;
+}
+
 .header {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--mantine-color-dark-4);
+  background-color: var(--mantine-color-dark-8);
+
   display: flex;
   justify-content: space-between;
   padding: 0 12px 0 6px;
@@ -7,80 +15,19 @@
 }
 
 .navbar {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+  transition: width 0.3s ease;
   background-color: #0f0f0f;
   border-right: 1px solid #3b3b3b;
 }
 
-.main {
-  width: 100%;
+.sidebar {
+  border-bottom: 1px solid var(--mantine-color-dark-4);
+  background-color: var(--mantine-color-dark-7);
 }
 
-// Right Section: Icons & Profile
-.rightSection {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.desktopOnly {
-  @media (max-width: 640px) {
-    display: none;
-  }
-}
-
-.profileBtn {
-  border: none;
-  background-color: transparent;
-  padding: 0;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    &:hover {
-      background-color: #313131;
-    }
-  }
-}
-
-.menuLink {
-  color: var(--text-primary, #030303);
-  text-decoration: none;
-  font-size: 14px;
-  display: block;
-  width: 100%;
-
-  @media (prefers-color-scheme: dark) {
-    color: #ffffff;
-  }
-}
-
-// Mobile Menu
-.mobileLink {
-  color: var(--text-primary, #030303);
-  text-decoration: none;
-  font-size: 14px;
-  padding: 12px 0;
-  display: block;
-  border-bottom: 1px solid var(--border-color, #e0e0e0);
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:hover {
-    color: #1976d2;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: #ffffff;
-    border-bottom-color: #303030;
-  }
-}
-
-.menuBody {
-  z-index: 990 !important;
+.main_wrapper {
+  padding: 10px 20px;
 }

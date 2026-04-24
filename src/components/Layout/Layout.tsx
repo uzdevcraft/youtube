@@ -1,34 +1,40 @@
 'use client';
 
-import React from 'react';
+import { useContext } from '@/contexts/Layout';
+
 import { AppShell } from '@mantine/core';
 import { Header } from '@/containers/Header';
 import { Sidebar } from '@/components/Sidebar';
 
-import { useContext } from '@/contexts/Layout';
-
 import classes from './Layout.module.scss';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { desktopOpen, mobileOpen, toggleDesktop } = useContext();
-
-  if (desktopOpen === null) toggleDesktop();
+  const { desktopOpen } = useContext();
 
   return (
     <AppShell
-      padding="md"
+      transitionDuration={300}
+      transitionTimingFunction="ease-in-out"
+      navbar={{
+        width: desktopOpen ? 250 : 70,
+        breakpoint: 0
+      }}
       header={{ height: 60 }}
-      navbar={{ width: 250, breakpoint: 'sm', collapsed: { mobile: !mobileOpen, desktop: !desktopOpen } }}
+      classNames={{
+        root: classes.root,
+        navbar: classes.navbar,
+        header: classes.header
+      }}
     >
-      <AppShell.Header classNames={{ header: classes.header }}>
+      <AppShell.Header>
         <Header />
       </AppShell.Header>
-
-      <AppShell.Navbar classNames={{ navbar: classes.navbar }}>
+      <AppShell.Navbar>
         <Sidebar />
       </AppShell.Navbar>
-
-      <AppShell.Main classNames={{ main: classes.main }}>{children}</AppShell.Main>
+      <AppShell.Main>
+        <div className={classes.main_wrapper}>{children}</div>
+      </AppShell.Main>
     </AppShell>
   );
 }
